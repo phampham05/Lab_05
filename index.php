@@ -1,12 +1,38 @@
 <?php
-require 'vendor/autoload.php';
+require_once 'app/Controllers/ProductController.php';
 
-use App\Controllers\StudentController;
+$page = $_GET['page'] ?? 'product-list';
+$controller = new ProductController();
 
-$page = $_GET['page'] ?? 'students';
+switch ($page) {
+    case 'product-list':
+        $controller->index();
+        break;
 
-if ($page === 'students') {
-    (new StudentController())->index();
-} else {
-    echo "404 - Page Not Found";
+    case 'product-detail':
+        $controller->detail();
+        break;
+
+    case 'product-add':
+        $controller->create();
+        break;
+
+    case 'product-store':
+        $controller->store();
+        break;
+
+    case 'product-edit':
+        $controller->edit();
+        break;
+
+    case 'product-update':
+        $controller->update();
+        break;
+
+    case 'product-delete':
+        $controller->delete();
+        break;
+
+    default:
+        echo "404 - Page not found";
 }
